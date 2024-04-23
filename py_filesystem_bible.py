@@ -76,14 +76,45 @@ def copia_sposta_file():
     shutil.move(full_filename_from, full_filename_to)
 
 
+def path_explorer():
+    path = os.getcwd()
+    for cartella, sottocartelle, files in os.walk(path):
+        print(f"Ci troviamo nella cartella {cartella}")
+        if sottocartelle:
+            print(f"Le sottocartelle sono {sottocartelle}")
+        for file in files:
+            if file.endswith(".md"):
+                print(f"File md {file}")
+
+
+def play_with_dirs():
+    root_path = "d:\\"
+    new_folder = os.path.join(root_path, "cartella1")
+    try:
+        os.makedirs(new_folder)
+    except:
+        print(f"Errore nella creazione della cartella {new_folder}")
+
+    copyed_folder = os.path.join(root_path, "cartella2")
+    try:
+        shutil.copytree(new_folder, copyed_folder)
+    except:
+        print(f"Errore nella copia delle cartella {copyed_folder}")
+
+    os.removedirs(new_folder)
+    shutil.rmtree(copyed_folder)
+
+
 if __name__ == "__main__":
-        scelta = input(
-            """
-    Ciao, quale metodo vuoi provare?
-    1 - Working dir
-    2 - Info file
-    3 - Check path
-    4 - Copia&Sposta file\n"""
+    scelta = input(
+        """
+Ciao, quale metodo vuoi provare?
+1 - Working dir
+2 - Info file
+3 - Check path
+4 - Copia&Sposta file
+5 - Path Explorer
+6 - Play with dir\n"""
     )
     match scelta:
         case "1":
@@ -94,4 +125,7 @@ if __name__ == "__main__":
             check_path()
         case "4":
             copia_sposta_file()
-
+        case "5":
+            path_explorer()
+        case "6":
+            play_with_dirs()
